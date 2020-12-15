@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TestActivity">
+
+    <Button
+        android:id="@+id/loadFeatureModel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="@string/btnLoadModel"
+    />
+
+    <Button
+        android:id="@+id/getMaxiumFace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_toRightOf="@+id/loadFeatureModel"
+        android:text="@string/getMaxiumFace"
+    />
+
+    <Button
+        android:id="@+id/hasHardhat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="安全帽检测" />
+
+
+    <Button
+        android:id="@+id/findFace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/loadFeatureModel"
+        android:text="@string/findface"
+        />
+
+    <Button
+        android:id="@+id/addDbItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/findFace"
+        android:text="@string/get_feature2"
+   />
+
+
+
+
+
+
+
+    <Button
+        android:id="@+id/live"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loadFeatureModel"
+        android:text="@string/live" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="199dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/findFace"
+        android:layout_toRightOf="@+id/findFace"
+        android:text="@string/test_hint" />
+
+    <ImageView
+        android:id="@+id/image_1"
+        android:layout_below="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</RelativeLayout>
