@@ -26,11 +26,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.kanbig.vision4m.FaceInfo;
-import com.kanbig.vision4m.FaceQueryResult;
-import com.kanbig.vision4m.V4Edge;
-import com.kanbig.vision4m.NativeImage;
 import com.kanbig.facesdk.facedetect.Fd2Activity;
+import com.kanbig.vision4m.FaceInfo;
+import com.kanbig.vision4m.NativeImage;
+import com.kanbig.vision4m.V4Edge;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -194,7 +193,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         Dialog builder = new Dialog(this);
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
         builder.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                new ColorDrawable(Color.TRANSPARENT));
         builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
@@ -259,7 +258,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
 
                     FaceInfo faceInfo[] = v4Edge.getFaces(nativeImage.buf, nativeImage.width, nativeImage.height, false);
-                    Mat canvas = org.opencv.imgcodecs.Imgcodecs.imread(images.get(0).path);
+                    Mat canvas = Imgcodecs.imread(images.get(0).path);
                     timeDetectFace = System.currentTimeMillis() - timeDetectFace;
 
                     //Get Results
@@ -282,7 +281,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                                 paint.setStyle(Paint.Style.STROKE);
                                 paint.setStrokeWidth(5);
                                 //Draw rect
-                                org.opencv.imgproc.Imgproc.rectangle(canvas, new Point(left, top), new Point(right, bottom), new Scalar(0, 0, 255), 3);
+                                Imgproc.rectangle(canvas, new Point(left, top), new Point(right, bottom), new Scalar(0, 0, 255), 3);
                             }
 
                         }
@@ -293,7 +292,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 } else if (requestCode == IMAGE_PICKER4) {
                     ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                     File imgFile2 = new File(images.get(0).path);
-                    Mat mat = org.opencv.imgcodecs.Imgcodecs.imread(images.get(0).path);
+                    Mat mat = Imgcodecs.imread(images.get(0).path);
                     Imgproc.resize(mat, mat, new Size(mat.width() / 3, mat.height() / 3));
                     NativeImage nativeImage = v4Edge.readImage(images.get(0).path);
 

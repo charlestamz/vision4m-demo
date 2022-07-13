@@ -16,10 +16,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.kanbig.facesdk.demo.R;
 import com.kanbig.vision4m.FaceQueryResult;
 import com.kanbig.vision4m.V4Edge;
-import com.kanbig.facesdk.demo.R;
-import com.kanbig.vision4m.facedetect.PortraitCameraBridgeViewBase;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;

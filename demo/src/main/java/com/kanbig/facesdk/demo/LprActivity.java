@@ -41,7 +41,7 @@ import java.util.ArrayList;
 public class LprActivity extends Activity implements View.OnClickListener {
 
     FrameLayout previewFl;
-    CameraPreview cameraPreview;
+    LprCameraPreview cameraPreview;
     TextView plateTv;
     TextView regTv;
     ImageView image;
@@ -62,18 +62,20 @@ public class LprActivity extends Activity implements View.OnClickListener {
         tableLayout = findViewById(R.id.lpr_table);
         image = findViewById(R.id.image);
 
-        V4Edge.getInstance(getApplicationContext()).loadLprModel("", 0.10f, 0.4f, 0.8f);
+        V4Edge.getInstance(getApplicationContext()).loadLprModel("", 0.10f, 0.4f, 0.95f);
+        V4Edge.getInstance(getApplicationContext()).initVehicleCounter(200, 0, 200, 400, 1, 0, 3, 0.3f, 0.4f, 0.1f, 0.4f);
     }
 
     private void initCamera() {
 
 
     }
+
     public void showImage(Bitmap bitmap) {
         Dialog builder = new Dialog(this);
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
         builder.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                new ColorDrawable(Color.TRANSPARENT));
         builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
@@ -88,6 +90,7 @@ public class LprActivity extends Activity implements View.OnClickListener {
                 ViewGroup.LayoutParams.MATCH_PARENT));
         builder.show();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -120,8 +123,8 @@ public class LprActivity extends Activity implements View.OnClickListener {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(PlateInfo plate) {
-        plateTv.setText(plate.plateNo);
-        stopPreview();
+        plateTv.append("\n"+plate.plateNo);
+//        stopPreview();
     }
 
     @Override
@@ -134,7 +137,7 @@ public class LprActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.btn_opencam:
-                cameraPreview = new CameraPreview(this);
+                cameraPreview = new LprCameraPreview(this);
                 previewFl.addView(cameraPreview);
                 break;
         }
