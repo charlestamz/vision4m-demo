@@ -61,9 +61,36 @@ public class LprActivity extends Activity implements View.OnClickListener {
         plateTv = findViewById(R.id.plate_tv);
         tableLayout = findViewById(R.id.lpr_table);
         image = findViewById(R.id.image);
-
-        V4Edge.getInstance(getApplicationContext()).loadLprModel("", 0.10f, 0.4f, 0.95f);
-        V4Edge.getInstance(getApplicationContext()).initVehicleCounter(200, 0, 200, 400, 1, 0, 3, 0.3f, 0.4f, 0.1f, 0.4f);
+        /**
+         * 载入车牌识别需要的模型和参数
+         * @param modelPath
+         * @param detectorThresh 建议0.1 检测参数
+         * @param iouThresh      建议0.4 IOU去重值
+         * @param lprThresh      建议0.8 车牌识别阈值，越高越准确
+         * @return true if the model is ok
+         */
+        V4Edge.getInstance(getApplicationContext()).loadLprModel("", 0.10f, 0.4f, 0.96f);
+        /**
+         * 初始化车辆计数参数括计数线，方向
+         * 计数线
+         * |
+         * ————————————> 方向向量
+         * |
+         * |
+         * |
+         * 注意：当不设置计数线时，车辆计数将不会计算是否经过计数线，只计算是否和direct参数运动方向一致
+         * @param line_start_x      计数线start点 x
+         * @param line_start_y      计数线start点 y
+         * @param line_end_x        计数线end点 x
+         * @param line_end_y        计数线end点 y
+         * @param dir_0             方向向量 [0]
+         * @param dir_1             方向向量 [1]
+         * @param max_recog_time    车牌识别次数
+         * @param good_track_thresh 追踪阈值 建议 0.4
+         * @param new_track_thresh  新track建立值 建议 0.1
+         * @param match_thresh      匹配track值 建议 0.4
+         */
+        V4Edge.getInstance(getApplicationContext()).initVehicleCounter(200, 0, 0, 0, 1, 0, 3, 0.3f, 0.4f, 0.1f, 0.4f);
     }
 
     private void initCamera() {

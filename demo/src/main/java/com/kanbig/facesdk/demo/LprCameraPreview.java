@@ -33,7 +33,6 @@ import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -165,6 +164,13 @@ public class LprCameraPreview extends SurfaceView implements SurfaceHolder.Callb
                         break;
                 }
                 Mat canvas = mat.clone();
+                /**
+                 * 获取视频中的车辆并获得车牌，使用之前，需要先通过initVehicleCounter初始化计数线。
+                 * 当输出参数canvas为非空的mat时，会绘制canvas上的车辆和车牌，以及计数线
+                 * @param inputImg 传入待检测图片
+                 * @param canvas 输出的图片
+                 * @return 车辆信息，包含车牌信息
+                 */
                 VehicleInfo[] vehicles = V4Edge.getInstance(getContext()).getVehiclesFromVideo(mat, canvas);
                 t0 = System.currentTimeMillis() - t0;
                 Log.e(TAG, "onPreviewFrame: vehicles: size=" + (vehicles == null ? 0 : vehicles.length) + ",time = " + t0);
